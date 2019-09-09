@@ -1,40 +1,24 @@
-# airly [![GoDoc](https://godoc.org/github.com/mbialon/airly?status.svg)](http://godoc.org/github.com/mbialon/airly) [![Go Report Card](https://goreportcard.com/badge/github.com/mbialon/airly)](https://goreportcard.com/report/github.com/mbialon/airly)
+# airly [![GoDoc](https://godoc.org/gofer.dev/airly?status.svg)](http://godoc.org/gofer.dev/airly) [![Go Report Card](https://goreportcard.com/badge/gofer.dev/airly)](https://goreportcard.com/report/gofer.dev/airly)
 
 [Airly](https://airly.eu) API client for Go.
 
 ## Usage
 
-```go
-package main
+```shell
+$ go get gofer.dev/airly/cmd/airly-status
+```
 
-import (
-	"os"
+### i3
 
-	"github.com/mbialon/airly"
-)
+`airly-status -d` downloads measurements for the given location to `/tmp/airly.json`.
 
-func main() {
-	c := airly.NewClient(airly.WithAPIKey(os.Getenv("AIRLY_APIKEY")))
-	v, err := c.NearestSensorMeasurements(&airly.NearestSensorMeasurementParams{
-		Latitude:    50.09394,
-		Longitude:   18.99622,
-		MaxDistance: 1500,
-	})
-	if err != nil {
-		panic(err)
-	}
-	q := v.AirQualityIndex
-	switch {
-	case q <= 25:
-		println("Very low")
-	case q <= 50:
-		println("Low")
-	case q <= 75:
-		println("Medium")
-	case q <= 100:
-		println("High")
-	case q > 100:
-		println("Very high")
-	}
-}
+```shell
+$ airly-status -d -apikey ${APIKEY} -lat ${LATITUDE} -lon ${LONGITUDE} -dist 0.5
+```
+
+`airly-status -s` prints status in the terminal or i3status.
+
+```shell
+$ airly-status -s
+💚 25.8🌡14.8°C 💦 97% ️+55s
 ```
