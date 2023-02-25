@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/peterbourgon/ff"
+	"github.com/peterbourgon/ff/v3"
 	"gofer.dev/airly/v2"
 )
 
